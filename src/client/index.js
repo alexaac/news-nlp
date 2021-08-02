@@ -8,3 +8,6 @@ import './styles/form.scss';
 import './styles/header.scss';
 
 export { checkForName, handleSubmit };
+
+window.checkForName = checkForName;
+window.handleSubmit = handleSubmit;
