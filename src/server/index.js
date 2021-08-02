@@ -10,6 +10,14 @@ dotenv.config();
 projectData = {
   apiKey: process.env.API_KEY,
   apiUrl: process.env.API_URL,
+  apiSentiment: {
+    'P+': 'strong positive',
+    P: 'positive',
+    NEU: 'neutral',
+    N: 'negative',
+    'N+': 'strong negative',
+    NONE: 'without polarity',
+  },
 };
 
 console.log(`Your API key is ${process.env.API_KEY}`);
@@ -17,16 +25,6 @@ console.log(`Your API key is ${process.env.API_KEY}`);
 const app = express();
 app.use(cors());
 app.options('*', cors());
-
-var allowCrossDomain = function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'example.com');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-  next();
-};
-
-app.use(allowCrossDomain);
 
 // to use json
 app.use(bodyParser.json());

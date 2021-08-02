@@ -29,41 +29,31 @@ function handleSubmit(event) {
   getEnvData();
 
   const setActions = async () => {
-    const { apiKey, apiUrl } = projectData;
+    const { apiKey, apiUrl, apiSentiment } = projectData;
+    console.log(apiSentiment);
+    const formdata = new FormData();
+    formdata.append('key', apiKey);
+    formdata.append('txt', formText);
+    formdata.append('lang', 'en');
 
-    const data = {
-      key: apiKey,
-      model: 'general',
-      lang: 'en',
-      txt: formText,
+    const requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow',
     };
 
-    console.log('Data: ', data);
+    const apiRes = await fetch(apiUrl, requestOptions);
 
-    const apiRes = await fetch(apiUrl, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      redirect: 'follow',
-    })
-      .then((response) => ({
-        status: response.status,
-        body: response.json(),
-      }))
-      .then(({ status, body }) => {
-        console.log(status, body);
-        document.getElementById('results').innerHTML = body;
-      })
-      .catch((error) => console.log('error', error));
+    try {
+      const meaningData = await apiRes.json();
 
-    //   try {
-    //   const meaningData = await apiRes.json();
+      document.getElementById('results').innerHTML =
+        apiSentiment[meaningData.score_tag];
 
-    //   document.getElementById('results').innerHTML = res.message;
-
-    //   return meaningData;
-    // } catch (error) {
-    //   console.error('error', error);
-    // }
+      return meaningData;
+    } catch (error) {
+      console.error('error', error);
+    }
   };
 
   //   fetch('http://localhost:8082/test')
