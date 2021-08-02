@@ -30,7 +30,7 @@ function handleSubmit(event) {
 
   const setActions = async () => {
     const { apiKey, apiUrl, apiSentiment } = projectData;
-    console.log(apiSentiment);
+
     const formdata = new FormData();
     formdata.append('key', apiKey);
     formdata.append('txt', formText);

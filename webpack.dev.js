@@ -21,12 +21,6 @@ module.exports = merge(common, {
     writeToDisk: true,
 
     contentBase: './dist',
-
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': '*',
-      'Access-Control-Allow-Methods': '*',
-    },
   },
 
   // devServer: {
