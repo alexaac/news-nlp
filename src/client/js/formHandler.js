@@ -1,4 +1,40 @@
-function handleSubmit(event) {
+/* Function to get global variables */
+const getEnvData = async () => {
+  const request = await fetch('/all');
+
+  try {
+    const allData = await request.json();
+
+    return allData;
+  } catch (error) {
+    console.error('error', error);
+  }
+};
+
+const callMeaningApi = async (apiKey, apiUrl, formUrl) => {
+  const formdata = new FormData();
+  formdata.append('key', apiKey);
+  formdata.append('url', formUrl);
+  formdata.append('lang', 'en');
+
+  const requestOptions = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow',
+  };
+
+  const apiRes = await fetch(apiUrl, requestOptions);
+
+  try {
+    const meaningData = await apiRes.json();
+
+    return meaningData;
+  } catch (error) {
+    console.error('error', error);
+  }
+};
+
+const handleSubmit = async (event) => {
   event.preventDefault();
 
   // check what url was put into the form field
@@ -7,60 +43,17 @@ function handleSubmit(event) {
 
   console.log('::: Form Submitted :::');
 
+  const { apiKey, apiUrl, apiSentiment } = await getEnvData();
+
   // MeaningCloud API
-  // Setup empty JS object to act as endpoint for all routes
-  let projectData = {};
+  const meaningData = await callMeaningApi(apiKey, apiUrl, formUrl);
 
-  /* Function to get global variables */
-  const getEnvData = async () => {
-    const request = await fetch('/all');
-
-    try {
-      const allData = await request.json();
-
-      projectData = allData;
-
-      setActions();
-    } catch (error) {
-      console.error('error', error);
-    }
-  };
-
-  getEnvData();
-
-  const setActions = async () => {
-    const { apiKey, apiUrl, apiSentiment } = projectData;
-
-    const formdata = new FormData();
-    formdata.append('key', apiKey);
-    formdata.append('url', formUrl);
-    formdata.append('lang', 'en');
-
-    const requestOptions = {
-      method: 'POST',
-      body: formdata,
-      redirect: 'follow',
-    };
-
-    const apiRes = await fetch(apiUrl, requestOptions);
-
-    try {
-      const meaningData = await apiRes.json();
-
-      document.getElementById('results').innerHTML =
-        apiSentiment[meaningData.score_tag];
-
-      return meaningData;
-    } catch (error) {
-      console.error('error', error);
-    }
-  };
-
-  //   fetch('http://localhost:8082/test')
-  //     .then((res) => res.json())
-  //     .then(function (res) {
-  //       document.getElementById('results').innerHTML = res.message;
-  //     });
-}
+  if (meaningData.status.code === '0') {
+    document.getElementById('results').innerHTML =
+      apiSentiment[meaningData.score_tag];
+  } else {
+    document.getElementById('results').innerHTML = meaningData.status.msg;
+  }
+};
 
 export { handleSubmit };
