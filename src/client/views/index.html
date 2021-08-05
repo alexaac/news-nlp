@@ -6,41 +6,91 @@
   </head>
 
   <body>
-    <header>
-      <div class="">Logo</div>
-      <div class="">navigation</div>
-    </header>
+    <div class="mps-wrap-flex">
+      <header class="header">
+        <div class="nav-flex">
+          <div class="nav-brand"><em>NLP</em></div>
+          <div class="nav-mobile-button">
+            <span></span> <span></span> <span></span> <span></span>
+          </div>
+          <nav role="navigation" class="nav-menu-flex">
+            <div class="nav-menu-wrap">
+              <div role="list" class="nav-menu-list-flex">
+                <div role="listitem" class="nav-menu-item">
+                  <a href="#" class="nav-link mps-link">Sentiment Analysis</a>
+                </div>
+                <div role="listitem" class="nav-menu-item">
+                  <a href="#" class="nav-link mps-link"
+                    >Language Identification</a
+                  >
+                </div>
+              </div>
+            </div>
+          </nav>
+          <div class="nav-menu-wrap nav-right">
+            <div role="list" class="nav-menu-list-flex">
+              <div role="listitem" class="nav-menu-item">
+                <a href="#" class="mps-btn mps-btn-primary">Subscribe</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
-    <main>
-      <section>
-        <p>Please input an article url to analize the overall feeling.</p>
-        <br />
-        <form class="" onsubmit="return handleSubmit(event)">
-          <input
-            id="name"
-            type="text"
-            name="input"
-            value=""
-            placeholder="Name"
-          />
-          <input
-            type="submit"
-            name=""
-            value="submit"
-            onclick="return handleSubmit(event)"
-            onsubmit="return handleSubmit(event)"
-          />
-        </form>
-      </section>
+      <main>
+        <h1>Natural language processing (NLP) using Sentiment Analysis API</h1>
+        <section>
+          <p>
+            Please input an <span><i>article url</i></span> to perform the
+            sentiment analysis.
+          </p>
+          <p>
+            To analyze sentiment means to detect if the feelings and thoughts in
+            the language used for communication are positive or negative.
+          </p>
+          <p>
+            This application uses the
+            <a
+              href="https://learn.meaningcloud.com/developer/sentiment-analysis/2.1/doc/what-is-sentiment-analysis"
+              >Sentiment Analysis API version 2.1</a
+            >
+          </p>
+          <br />
+          <form class="">
+            <input
+              id="name"
+              type="text"
+              name="input"
+              value=""
+              placeholder="Name"
+            />
+            <input
+              type="submit"
+              name=""
+              value="Submit"
+              onclick="return handleSubmit(event, document.getElementById('name').value)"
+              onsubmit="return handleSubmit(event, document.getElementById('name').value)"
+            />
+          </form>
+        </section>
 
-      <section>
-        <strong>The result of the text analysis:</strong>
-        <div id="results"></div>
-      </section>
-    </main>
+        <section>
+          <strong>The result of the text analysis:</strong>
+          <div id="results"></div>
+        </section>
+      </main>
 
-    <footer>
-      <p>This is a footer</p>
-    </footer>
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-inner-flex">
+            <div class="footer-inner-flex-2">© NLP 2021</div>
+            <div class="footer-links">
+              <a href="#" class="footer-link mps-link">Terms</a>
+              <a href="#" class="footer-link mps-link">Privacy</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

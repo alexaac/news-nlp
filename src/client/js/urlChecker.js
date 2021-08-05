@@ -6,7 +6,9 @@ function checkUrl(inputUrl) {
   const regex = new RegExp(expression);
 
   if (!inputUrl.match(regex)) {
-    alert('Invalid URL.');
+    return 'Invalid URL';
+  } else {
+    return 'Ok';
   }
 }
 

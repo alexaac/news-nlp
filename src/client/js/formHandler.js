@@ -1,16 +1,3 @@
-/* Function to get global variables */
-const getEnvData = async () => {
-  const request = await fetch('/all');
-
-  try {
-    const allData = await request.json();
-
-    return allData;
-  } catch (error) {
-    console.error('error', error);
-  }
-};
-
 const callMeaningApi = async (apiKey, apiUrl, formUrl) => {
   const formdata = new FormData();
   formdata.append('key', apiKey);
@@ -27,6 +14,7 @@ const callMeaningApi = async (apiKey, apiUrl, formUrl) => {
 
   try {
     const meaningData = await apiRes.json();
+    console.log('Api res ', meaningData);
 
     return meaningData;
   } catch (error) {
@@ -34,12 +22,16 @@ const callMeaningApi = async (apiKey, apiUrl, formUrl) => {
   }
 };
 
-const handleSubmit = async (event) => {
+const handleSubmit = async (event, formUrl) => {
   event.preventDefault();
 
-  // check what url was put into the form field
-  let formUrl = document.getElementById('name').value;
-  checkUrl(formUrl);
+  console.log(formUrl);
+  // const checked = checkUrl(formUrl);
+  // console.log(checked);
+  // if (checked !== 'Ok') {
+  //   document.getElementById('results').innerHTML = 'Invalid URL';
+  //   return;
+  // }
 
   console.log('::: Form Submitted :::');
 
@@ -48,12 +40,12 @@ const handleSubmit = async (event) => {
   // MeaningCloud API
   const meaningData = await callMeaningApi(apiKey, apiUrl, formUrl);
 
-  if (meaningData.status.code === '0') {
-    document.getElementById('results').innerHTML =
-      apiSentiment[meaningData.score_tag];
-  } else {
-    document.getElementById('results').innerHTML = meaningData.status.msg;
-  }
+  const msg =
+    meaningData.status.code === '0'
+      ? apiSentiment[meaningData.score_tag]
+      : meaningData.status.msg;
+
+  document.getElementById('results').innerHTML = msg;
 };
 
-export { handleSubmit };
+export { handleSubmit, callMeaningApi };
