@@ -60,7 +60,7 @@ Allow users to run Natural Language Processing (NLP) on articles or blogs found 
 
 ### TODO
 
-Deploy with Heroku
+Deployed with Heroku - https://nlp-sentiment-ud.herokuapp.com/
 
 ### Credits
 
