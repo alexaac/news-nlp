@@ -1,3 +1,7 @@
+/**
+ * @description Check url is valid
+ * @param {string} inputUrl - url to analyze
+ */
 function checkUrl(inputUrl) {
   console.log('::: Running checkUrl :::', inputUrl);
 

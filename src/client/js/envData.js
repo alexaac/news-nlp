@@ -1,4 +1,7 @@
-/* Function to get global variables */
+/**
+ * @description Get global variables
+ * @param none
+ */
 const getEnvData = async () => {
   const request = await fetch('/all');
 

@@ -1,3 +1,9 @@
+/**
+ * @description Get data from Meaning API
+ * @param {string} apiKey - API key
+ * @param {string} apiUrl - API url
+ * @param {string} formUrl - url to analyze
+ */
 const callMeaningApi = async (apiKey, apiUrl, formUrl) => {
   const formdata = new FormData();
   formdata.append('key', apiKey);
@@ -22,6 +28,11 @@ const callMeaningApi = async (apiKey, apiUrl, formUrl) => {
   }
 };
 
+/**
+ * @description Display result from Meaning API on the page
+ * @param {object} event - submit
+ * @param {string} formUrl - url to analyze
+ */
 const handleSubmit = async (event, formUrl) => {
   event.preventDefault();
 
