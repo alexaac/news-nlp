@@ -9,7 +9,6 @@ dotenv.config();
 
 projectData = {
   apiKey: process.env.API_KEY,
-  apiUrl: process.env.API_URL,
   apiSentiment: {
     'P+': 'strong positive',
     P: 'positive',

@@ -20,7 +20,6 @@ const callMeaningApi = async (apiKey, apiUrl, formUrl) => {
 
   try {
     const meaningData = await apiRes.json();
-    console.log('Api res ', meaningData);
 
     return meaningData;
   } catch (error) {
@@ -36,25 +35,33 @@ const callMeaningApi = async (apiKey, apiUrl, formUrl) => {
 const handleSubmit = async (event, formUrl) => {
   event.preventDefault();
 
-  console.log(formUrl);
-  // const checked = checkUrl(formUrl);
-  // console.log(checked);
-  // if (checked !== 'Ok') {
-  //   document.getElementById('results').innerHTML = 'Invalid URL';
-  //   return;
-  // }
+  // check what url was put into the form field
+  const checked = checkUrl(formUrl);
+
+  if (checked !== 'Ok') {
+    document.getElementById('results').innerHTML = 'Invalid URL';
+    return;
+  }
 
   console.log('::: Form Submitted :::');
 
-  const { apiKey, apiUrl, apiSentiment } = await getEnvData();
+  const { apiKey, apiSentiment } = await getEnvData();
 
   // MeaningCloud API
-  const meaningData = await callMeaningApi(apiKey, apiUrl, formUrl);
-
-  const msg =
-    meaningData.status.code === '0'
-      ? apiSentiment[meaningData.score_tag]
-      : meaningData.status.msg;
+  const meaningData = await callMeaningApi(
+    apiKey,
+    'https://api.meaningcloud.com/sentiment-2.1',
+    formUrl,
+  );
+  console.log(meaningData);
+  const msg = `General feeling: ${
+    meaningData.score_tag ? apiSentiment[meaningData.score_tag] : ''
+  } <br/>
+  Score_tag: ${meaningData.score_tag} <br/>
+  Subjectivity: ${meaningData.subjectivity} <br/>
+  Confidence: ${meaningData.confidence} <br/>
+  Agreement: ${meaningData.agreement} <br/>
+  Irony: ${meaningData.irony}`;
 
   document.getElementById('results').innerHTML = msg;
 };
