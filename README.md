@@ -58,7 +58,7 @@ Allow users to run Natural Language Processing (NLP) on articles or blogs found 
 └── webpack.prod.js
 ```
 
-### TODO
+### Deployed
 
 Deployed with Heroku - https://nlp-sentiment-ud.herokuapp.com/
 
