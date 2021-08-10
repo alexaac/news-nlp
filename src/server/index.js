@@ -20,8 +20,6 @@ projectData = {
   },
 };
 
-console.log(`Your API key is ${process.env.API_KEY}`);
-
 const app = express();
 app.use(cors());
 app.options('*', cors());
@@ -36,9 +34,6 @@ app.use(
 );
 
 app.use(express.static('dist'));
-
-console.log(__dirname);
-console.log(JSON.stringify(mockAPIResponse));
 
 app.get('/', function (req, res) {
   res.sendFile('dist/index.html');
