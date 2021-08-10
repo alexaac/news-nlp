@@ -9,7 +9,7 @@
     <div class="mps-wrap-flex">
       <header class="header">
         <div class="nav-flex">
-          <div class="nav-brand"><em>NLP</em></div>
+          <div class="nav-brand"><em>Sentiment</em></div>
           <div class="nav-mobile-button">
             <span></span> <span></span> <span></span> <span></span>
           </div>
@@ -41,8 +41,11 @@
         <h1>Natural language processing (NLP) using Sentiment Analysis API</h1>
         <section>
           <p>
-            Please input an <span><i>article url</i></span> to perform the
-            sentiment analysis.
+            Please input an
+            <span
+              ><em><i>article url</i></em></span
+            >
+            to perform the sentiment analysis.
           </p>
           <p>
             To analyze sentiment means to detect if the feelings and thoughts in
@@ -83,7 +86,7 @@
       <footer class="footer">
         <div class="container">
           <div class="footer-inner-flex">
-            <div class="footer-inner-flex-2">© NLP 2021</div>
+            <div class="footer-inner-flex-2">© Sentiment 2021</div>
             <div class="footer-links">
               <a href="#" class="footer-link mps-link">Terms</a>
               <a href="#" class="footer-link mps-link">Privacy</a>
@@ -91,6 +94,16 @@
           </div>
         </div>
       </footer>
+
+      <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+          // Use the window load event to keep the page load performant
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js');
+          });
+        }
+      </script>
     </div>
   </body>
 </html>
