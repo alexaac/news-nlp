@@ -7,7 +7,7 @@
     "start": "node src/server/index.js",
     "build-prod": "webpack --config webpack.prod.js",
     "build-dev": "webpack serve --config webpack.dev.js",
-    "heroku-postbuild": "npm run build-prod"
+    "heroku-postbuild": "webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
